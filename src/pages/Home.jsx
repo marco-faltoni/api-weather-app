@@ -1,8 +1,7 @@
 import React from "react";
 // Redux
-import {useDispatch, useSelector} from 'react-redux';
-// actions
-import {loadLocation} from '../actions/LocalWeatherAction';
+import { useSelector} from 'react-redux';
+
 // import routing
 import { Link } from "react-router-dom";
 import WeatherIcon from 'react-icons-weather';

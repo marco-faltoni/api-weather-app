@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="App">
-      {weather.length != 0 && (
+      {weather.length !== 0 && (
         <Switch location={location} key={location.pathname}>
           <Route path="/" exact>
             <Home />
