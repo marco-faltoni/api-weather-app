@@ -7,24 +7,26 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import global style
 import { GlobalStyles } from "./GlobalStyle"
-// // redux setup
-// import {createStore, applyMiddleware, compose} from 'redux';
-// import rootReducers from './reducers/index';
-// import {Provider} from 'react-redux';
-// import thunk from 'redux-thunk';
+// redux setup
+import {createStore, applyMiddleware, compose} from 'redux';
+import rootReducers from './reducers';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 
-// const composeEnancher = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const store = createStore(
-//   rootReducers, 
-//   composeEnancher(applyMiddleware(thunk))
-//   );
+const composeEnancher = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducers, 
+  composeEnancher(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <GlobalStyles />
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <GlobalStyles />
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

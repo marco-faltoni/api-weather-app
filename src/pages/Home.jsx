@@ -1,17 +1,27 @@
 import React from "react";
+// Redux
+import {useDispatch, useSelector} from 'react-redux';
+// actions
+import {loadLocation} from '../actions/LocalWeatherAction';
 // import routing
 import { Link } from "react-router-dom";
 import WeatherIcon from 'react-icons-weather';
 import moment from 'moment';
 
-const Home = (props) => {
-  const { weather } = props;
+const Home = () => {
+  // getting back the data
+  const {weather} = useSelector((store) => store.weather);
+  console.log(weather);
+  // icon
   const wheatherIcon = weather.weather[0].id.toString();
+  // weather desc
   const wheatherCondition = weather.weather[0].description;
-  console.log( weather);
+  // getting date
   const todayFormat = moment().format('DD-MM-YYYY');
+  // getting city
   const localCity = weather.name;
 
+  // get timestamp
   let unix_timestamp = weather.dt;
   // Create a new JavaScript Date object based on the timestamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
@@ -27,16 +37,15 @@ const Home = (props) => {
   // Will display time in 10:30:23 format
   let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
-  console.log(formattedTime);
+  // console.log(formattedTime);
 
   // normalizzo il voto arrotondandolo ad un numero intero o alla sua meta(es. 3, 3.5 o 4)
   const temp = Math.round(weather.main.temp / 0.5) * 0.5;
-  console.log(temp);
-  // console.log(rating);
+  // console.log(temp);
 
   // salvo in una variabile il voto normalizzato di prima arrontodandolo al minimo
   const tempNormalized = Math.floor(temp);
-  console.log(tempNormalized);
+  // console.log(tempNormalized);
 
 
 

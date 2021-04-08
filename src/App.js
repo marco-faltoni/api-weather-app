@@ -1,4 +1,8 @@
 import React, {useEffect, useState} from "react";
+// Redux
+import {useDispatch, useSelector} from 'react-redux';
+// actions
+import {loadLocation} from './actions/LocalWeatherAction';
 //Router
 import { Switch, Route, useLocation } from "react-router-dom";
 //Import Pages
@@ -7,42 +11,39 @@ import DrawerInfo from "./pages/DrawerInfo";
 import axios from 'axios';
 
 function App() {
-  const [weather, setWeather] = useState(null);
+  // const [weather, setWeather] = useState(null);
+  let long;
+  let lat;
+  let lang = 'it';
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      long = position.coords.longitude;
+      lat = position.coords.latitude;
+    })
+  }
 
   const location = useLocation();
+
+  const dispatch = useDispatch();
   
   useEffect(()=> {
-    let long;
-    let lat;
-    let lang = 'it';
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        long = position.coords.longitude;
-        lat = position.coords.latitude;
+    dispatch(loadLocation(lat, long, lang));
+  },[dispatch]);
 
-        const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${process.env.REACT_APP_WEATHER_API}&lang=${lang}`;
-
-        axios.get(api).then((data)=>{
-          console.log(data);
-          console.log(data.data);
-          setWeather(data.data);
-        }).catch((err) => {
-          console.log(err);
-        })
-      })
-      
-    }
-  },[]);
+  // getting back the data
+  const {weather} = useSelector((store) => store.weather);
+  // console.log(weather.length);
+  
 
   return (
     <div className="App">
-      {weather && (
+      {weather.length != 0 && (
         <Switch location={location} key={location.pathname}>
           <Route path="/" exact>
-            <Home weather={weather} setWeather={setWeather} />
+            <Home />
           </Route>
           <Route path="/drawer" exact>
-            <DrawerInfo weather={weather} setWeather={setWeather} />
+            <DrawerInfo  />
           </Route>
         </Switch>
       )}
