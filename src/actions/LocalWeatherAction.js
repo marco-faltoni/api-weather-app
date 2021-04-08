@@ -15,7 +15,7 @@ export const loadLocation = (lat, long, lang) => async (dispatch) => {
   const forecastData = fetchDataForecast.data.list;
   // console.log(forecastData);
 
-  let threeDays = forecastData[0].dt + 172800;
+  let threeDays = forecastData[0].dt + 162000;
   let forecastMapped = [];
 
   forecastData.map((item, index)=> {
