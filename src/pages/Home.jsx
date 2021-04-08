@@ -1,7 +1,11 @@
 import React from "react";
 // Redux
 import { useSelector} from 'react-redux';
-
+import {
+  StyledContainer,
+  StyledMeteo,
+  StyledButton
+} from "../styles/Home.styles";
 // import routing
 import { Link } from "react-router-dom";
 import WeatherIcon from 'react-icons-weather';
@@ -32,7 +36,9 @@ const Home = () => {
   // Seconds part from the timestamp
   let seconds = "0" + date.getSeconds();
 
-  
+  console.log(moment().add(3, 'days').format('L'));
+
+  // moment().add(3, 'hours').format('L')
   // Will display time in 10:30:23 format
   let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
@@ -49,19 +55,24 @@ const Home = () => {
 
 
   return (
-    <div>
-      <div className="container">
-        <WeatherIcon name="owm" iconId={wheatherIcon} />
-        <h1>{tempNormalized}° C</h1>
-        <h1>Oggi a {localCity} c'è {wheatherCondition} </h1>
-        <h4>Ultimo Aggiornamento {todayFormat}, {formattedTime} </h4>
-        <button>
+    <StyledContainer>
+      <StyledButton>
           <Link to="/drawer">
-            todrawer
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
           </Link>
-        </button>
-      </div>
-    </div>
+      </StyledButton>
+      <StyledMeteo>
+        <div className="icons-and-temp">
+          <WeatherIcon name="owm" iconId={wheatherIcon}/>
+          <h1>{tempNormalized}°C</h1>
+        </div>
+        <h1 className="local">Oggi a <span>{localCity}</span> c'è <span>{wheatherCondition}</span></h1>
+        <h4>Ultimo Aggiornamento {todayFormat}, {formattedTime} </h4>
+        <h4>Powered by Synesthesia</h4>
+      </StyledMeteo>
+    </StyledContainer>
   );
 };
 
