@@ -65,7 +65,7 @@ const Home = () => {
       </StyledButton>
       <StyledMeteo>
         <div className="icons-and-temp">
-          <WeatherIcon name="owm" iconId={wheatherIcon}/>
+          <WeatherIcon name="owm" iconId={wheatherIcon} flip="horizontal" />
           <h1>{tempNormalized}°C</h1>
         </div>
         <h1 className="local">Oggi a <span>{localCity}</span> c'è <span>{wheatherCondition}</span></h1>
