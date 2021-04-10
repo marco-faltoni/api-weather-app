@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 // action creator
-export const loadLocation = (lat, long, lang) => async (dispatch) => {
+export const loadLocation = (lat, long, lang) => (dispatch) => {
+
+  let weatherData;
+  let forecastData;
 
   dispatch({
     type: "LOADING"
@@ -11,31 +14,46 @@ export const loadLocation = (lat, long, lang) => async (dispatch) => {
 
   const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${process.env.REACT_APP_WEATHER_API}&lang=${lang}`;
 
-  const fetchData = await axios.get(api);
-  const fetchDataForecast = await axios.get(forecastApi);
-  // console.log(fetchDataForecast.data.list);
-  const weatherData = fetchData.data;
-  const forecastData = fetchDataForecast.data.list;
-  // console.log(forecastData);
-
-  let threeDays = forecastData[0].dt + 162000;
-  let forecastMapped = [];
-
-  forecastData.map((item, index)=> {
-    if (item.dt <= threeDays ) {
-      forecastMapped.push(item);
-    }
+  axios.get(api).then((data) => {
+    weatherData = data.data;
+    dispatch({
+      type: 'FETCH_WEATHER',
+      payload: {
+        weather: weatherData,
+      }
+    })
+  }).catch((err) => {
+    console.log(`error to api ${err}`);
   });
 
-  // console.log(forecastMapped);
 
-  dispatch({
-    type: 'FETCH_WEATHER',
-    payload: {
-      weather: weatherData,
-      forecast: forecastMapped
-    }
-  })
+  axios.get(forecastApi).then((data) => {
+    forecastData = data.data.list;
+    console.log(forecastData);
+    let threeDays = forecastData[0].dt + 162000;
+    let forecastMapped = [];
+
+    forecastData.map((item, index)=> {
+      if (item.dt <= threeDays ) {
+        forecastMapped.push(item);
+      }
+    });
+    dispatch({
+      type: 'FETCH_WEATHER',
+      payload: {
+        weather: weatherData,
+        forecast: forecastMapped
+      }
+    })
+  }).catch((err) => {
+    console.log(`error to forecast ${err}`);
+  });
+  // console.log(fetchDataForecast.data.list);
+  // console.log(forecastData);
+
+  
+
+  // console.log(forecastMapped);
 }
 
 export const loadNoPosition = () => async (dispatch) => {

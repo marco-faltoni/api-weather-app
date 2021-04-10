@@ -84,11 +84,12 @@ const StyledButton = styled.div`
     .line1, .line2, .line3 {
       height: 2rem;
       width: 0.3rem;
-      box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 32%) inset;
-      -webkit-box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 32%) inset;
-      -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.32) inset;
+      border-collapse: separate;
       border-radius: 3px;
       margin-right: 2px;
+      box-shadow: 1px 1px 1px 0px #a4a4a4 inset;
+      -webkit-box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 32%) inset;
+      -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.32) inset;
     }
     @media (max-width: 768px) {
       transform: rotate(90deg);

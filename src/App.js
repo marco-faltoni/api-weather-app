@@ -37,7 +37,7 @@ function App() {
 
   // getting back the data
   const {weather, isLoading, noPosition} = useSelector((store) => store.weather);
-  // console.log(weather.length);
+  // console.log(weather, weather.length);
   
 
   return (

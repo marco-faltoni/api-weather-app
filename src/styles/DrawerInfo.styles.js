@@ -52,11 +52,13 @@ const StyledBack = styled.div`
     .line1, .line2, .line3 {
       height: 2rem;
       width: 0.3rem;
-      box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 32%) inset;
-      -webkit-box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 32%) inset;
-      -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.32) inset;
+      border-collapse: separate;
       border-radius: 3px;
       margin-right: 2px;
+      box-shadow: 1px 1px 1px 0px #a4a4a4 inset;
+      -webkit-box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 32%) inset;
+      -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.32) inset;
+
     }
   }
   
@@ -65,17 +67,21 @@ const StyledBack = styled.div`
 const StyledItems = styled.div`
   width: 100%;
   display: grid;
+  -ms-display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  -ms-grid-column: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1rem 1rem;
   padding: 3rem 0;
   padding-right: 1rem;
   @media (max-width: 374px) {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    -ms-grid-column: repeat(auto-fill, minmax(110px, 1fr));
     padding-right: 0;
     padding: 1rem 0;
   }
   @media (min-width: 375px) and (max-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    -ms-grid-column: repeat(auto-fill, minmax(130px, 1fr));
     padding-right: 0;
     padding: 1rem 0;
   }
