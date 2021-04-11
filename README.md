@@ -37,7 +37,7 @@ ATTENZIONE: per poter far funzionare la web-app, assicurarsi di recpurare un API
 - L’applicazione utilizza gli Hooks di React (useState, useEffect ecc).
 
 - L’applicazione utilizza React Redux per la gestione delle chiamate alle API e il mantenimento dello stato.
-- 
+
 - L’applicazione è sviluppata su due pagine e utilizza React Router per la navigazione.
 
 - L’applicazione offre compatibilità con IE 11, ad esclusione delle animazioni.
