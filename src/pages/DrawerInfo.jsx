@@ -11,18 +11,31 @@ import {
 import { Link } from "react-router-dom";
 import WeatherIcon from 'react-icons-weather';
 import moment from 'moment';
+// framer motion
+import {motion} from "framer-motion";
+import { pageAnimation, pageAnimationMobile, fade, fadeForecast} from "../animation";
 
 const DrawerInfo = () => {
     // getting back the data
     const {forecast} = useSelector((store) => store.weather);
     console.log(forecast);
 
+    let isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
+
+    const checkDevice = () => {
+      if (isMobile) {
+        return pageAnimationMobile;
+      } else {
+        return pageAnimation;
+      }
+    };
+
 
   return (
-    <StyledContainer>
+    <StyledContainer exit="exit" variants={checkDevice()} initial="hidden" animate="show">
       <StyledMeteo>
         <div className="title">
-          <h1>Previsioni</h1>
+          <motion.h1 variants={fade} >Previsioni</motion.h1>
         </div>
         <StyledItems>
           {forecast.map((item, key) => {
@@ -40,7 +53,7 @@ const DrawerInfo = () => {
             let formattedTime = hours + ':' + minutes.substr(-2);
             // console.log(formattedDate, formattedTime);
             return (
-              <StyledItem key={key}>
+              <StyledItem key={key} variants={fadeForecast}>
                 <div className="icon">
                   <WeatherIcon name="owm" iconId={wheatherIcon} flip="horizontal"/>
                 </div>

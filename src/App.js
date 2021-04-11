@@ -10,6 +10,9 @@ import Home from "./pages/Home";
 import DrawerInfo from "./pages/DrawerInfo";
 import Loader from "./components/Loader";
 import axios from 'axios';
+// framer motion
+import { AnimatePresence, motion } from "framer-motion";
+import { fade } from "./animation";
 
 function App() {
 
@@ -43,22 +46,24 @@ function App() {
   return (
     <div className="App">
       {weather.length !== 0 && (
-        <Switch location={location} key={location.pathname}>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/drawer" exact>
-            <DrawerInfo  />
-          </Route>
-        </Switch>
+        <AnimatePresence exitBeforeEnter>
+          <Switch location={location} key={location.pathname}>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/drawer" exact>
+              <DrawerInfo  />
+            </Route>
+          </Switch>
+        </AnimatePresence>
       )}
       {isLoading && (
-        <Loader />
+        <Loader variants={fade} />
       )}
       {noPosition && (
-        <div className="user-no-position">
+        <motion.div variants={fade} className="user-no-position">
           <h3>Permetti all'applicazione di rilevare la tua posizione! Ricarica la pagina.</h3>
-        </div>
+        </motion.div>
       )}
     </div>
   );

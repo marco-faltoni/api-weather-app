@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
+// framer motion
+import {motion} from "framer-motion";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,6 +13,7 @@ const StyledContainer = styled.div`
     justify-content: center;
   }
 `;
+
 const StyledMeteo = styled.div`
   width: 90%;
   padding: 0 8rem;

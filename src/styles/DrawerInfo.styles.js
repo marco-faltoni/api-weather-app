@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
+// framer motion
+import {motion} from "framer-motion";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -18,7 +20,6 @@ const StyledMeteo = styled.div`
   justify-content: center;
   padding: 2rem;
   @media (max-width: 768px) {
-    min-height: unset;
     width: 100%;
     margin-top: 3rem;
   }
@@ -87,7 +88,7 @@ const StyledItems = styled.div`
   }
 `;
 
-const StyledItem = styled.div`
+const StyledItem = styled(motion.div)`
   display:flex;
   padding: 1rem 0;
   @media (max-width: 768px) {

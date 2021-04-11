@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
+// framer motion
+import {motion} from "framer-motion";
 
-
-const StyledLoader = styled.div`
+const StyledLoader = styled(motion.div)`
   position: absolute;
   top: 50%;
   left: 50%;

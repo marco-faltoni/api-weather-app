@@ -10,11 +10,13 @@ import {
 import { Link } from "react-router-dom";
 import WeatherIcon from 'react-icons-weather';
 import moment from 'moment';
+// framer motion
+import {motion} from "framer-motion";
+import { pageAnimation, pageAnimationMobile, fade } from "../animation";
 
 const Home = () => {
-  // getting back the data
+  // getting back the data from redux
   const {weather} = useSelector((store) => store.weather);
-  console.log(weather);
   // icon
   const wheatherIcon = weather.weather[0].id.toString();
   // weather desc
@@ -35,42 +37,41 @@ const Home = () => {
   let minutes = "0" + date.getMinutes();
   // Seconds part from the timestamp
   let seconds = "0" + date.getSeconds();
-
-  console.log(moment().add(3, 'days').format('L'));
-
-  // moment().add(3, 'hours').format('L')
+  // console.log(moment().add(3, 'days').format('L'));
   // Will display time in 10:30:23 format
   let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-
-  // console.log(formattedTime);
-
   // normalizzo il voto arrotondandolo ad un numero intero o alla sua meta(es. 3, 3.5 o 4)
   const temp = Math.round(weather.main.temp / 0.5) * 0.5;
-  // console.log(temp);
-
   // salvo in una variabile il voto normalizzato di prima arrontodandolo al minimo
   const tempNormalized = Math.floor(temp);
-  // console.log(tempNormalized);
 
+  let isMobile = window.matchMedia("only screen and (max-width: 1024px)").matches;
 
+  const checkDevice = () => {
+    if (isMobile) {
+      return pageAnimationMobile;
+    } else {
+      return pageAnimation;
+    }
+  };
 
   return (
-    <StyledContainer>
+    <StyledContainer variants={checkDevice()} initial="hidden" animate="show" exit="exit" >
       <StyledButton>
-          <Link to="/drawer">
+          <Link variants={fade} to="/drawer">
             <div className="line1"></div>
             <div className="line2"></div>
             <div className="line3"></div>
           </Link>
       </StyledButton>
       <StyledMeteo>
-        <div className="icons-and-temp">
+        <motion.div variants={fade} className="icons-and-temp">
           <WeatherIcon name="owm" iconId={wheatherIcon} flip="horizontal" />
           <h1>{tempNormalized}°C</h1>
-        </div>
-        <h1 className="local">Oggi a <span>{localCity}</span> c'è <span>{wheatherCondition}</span></h1>
-        <h4>Ultimo Aggiornamento {todayFormat}, {formattedTime} </h4>
-        <h4>Powered by Synesthesia</h4>
+        </motion.div>
+        <motion.h1 variants={fade} className="local">Oggi a <span>{localCity}</span> c'è <span>{wheatherCondition}</span></motion.h1>
+        <motion.h4 variants={fade}>Ultimo Aggiornamento {todayFormat}, {formattedTime} </motion.h4>
+        <motion.h4 variants={fade}>Powered by Synesthesia</motion.h4>
       </StyledMeteo>
     </StyledContainer>
   );
