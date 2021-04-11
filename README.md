@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Versione Live
+Per poter visionare il progetto live, basta cliccare su questo link [React Weather Web App](https://reactopenweather-app.netlify.app/)
+
 ## Come eseguire il progetto
 
 Scaricare la repository su una cartella a scelta del prprio PC.
