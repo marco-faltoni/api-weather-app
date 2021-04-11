@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Scaricare la repository su una cartella a scelta del prprio PC.
 Aprire la repo da terminale con il proprio IDE preferito.
 
-per installare le dipendenze
+per installare le dipendenze (assicurarsi di aver installato NodeJS)
 ### `npm install`
 
 per far partire il progetto in locale
