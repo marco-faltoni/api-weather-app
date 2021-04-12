@@ -16,7 +16,10 @@ per installare le dipendenze (assicurarsi di aver installato NodeJS)
 per far partire il progetto in locale
 ### `npm start`
 
-ATTENZIONE: per poter far funzionare la web-app, assicurarsi di recpurare le API Keys rispettivamente dal servizio di OpenWeather(usato per il recupero dati meteo) e da quello di Algolia Places(usato per la ricerca dell'utente), e aggiungerle al file .env (da creare dentro la repo)
+ATTENZIONE: per poter far funzionare la web-app, assicurarsi di recpurare le API Keys rispettivamente dal servizio di OpenWeather(usato per il recupero dati meteo) e da quello di Algolia Places(usato per la ricerca dell'utente), e aggiungerle al file .env (da creare dentro la repo) scrivendo le seguenti chiavi: 
+- REACT_APP_WEATHER_API=AGGIUNGERE_KEY
+- REACT_APP_ALGOLIA_API_ID=AGGIUNGERE_KEY
+- REACT_APP_ALGOLIA_API_KEY=AGGIUNGERE_KEY
 
 
 ## Funzionalità Obbligatorie sviluppate
