@@ -16,7 +16,7 @@ per installare le dipendenze (assicurarsi di aver installato NodeJS)
 per far partire il progetto in locale
 ### `npm start`
 
-ATTENZIONE: per poter far funzionare la web-app, assicurarsi di recpurare un API Key dal servizio di OpenWeather e aggiungerle al file .env (da creare dentro la repo)
+ATTENZIONE: per poter far funzionare la web-app, assicurarsi di recpurare le API Keys rispettivamente dal servizio di OpenWeather(usato per il recupero dati meteo) e da quello di Algolia Places(usato per la ricerca dell'utente), e aggiungerle al file .env (da creare dentro la repo)
 
 
 ## Funzionalità Obbligatorie sviluppate
@@ -36,6 +36,9 @@ ATTENZIONE: per poter far funzionare la web-app, assicurarsi di recpurare un API
 ## Funzionalità Aggiuntive sviluppate
 
 - L’applicazione ha una versione mobile della UI.
+
+- L’applicazione permette la selezione di una città specifica tramite input testuale
+con autocomplete.
 
 - L’applicazione utilizza gli Hooks di React (useState, useEffect ecc).
 

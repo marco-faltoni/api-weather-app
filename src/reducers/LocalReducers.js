@@ -5,7 +5,7 @@ const initState = {
   noPosition: false
 }
 
-const localReducer = (state=initState, action) => {
+export const localReducer = (state=initState, action) => {
   switch(action.type){
       case "FETCH_WEATHER":
         return {...state, weather: action.payload.weather, forecast: action.payload.forecast, isLoading: false};

@@ -67,6 +67,16 @@ const StyledMeteo = styled.div`
       font-weight: 700;
     }
   }
+  .algolia-places {
+    width: 50%;
+    text-shadow: none;
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+    input {
+      background-color: #e4e4e4;
+    }
+  }
 `;
 const StyledButton = styled.div`
   height: 100vh;

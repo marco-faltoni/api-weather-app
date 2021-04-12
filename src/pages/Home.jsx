@@ -1,6 +1,10 @@
 import React from "react";
+// import search
+import AlgoliaPlaces from 'algolia-places-react';
 // Redux
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
+// actions
+import {loadLocation} from '../actions/LocalWeatherAction';
 import {
   StyledContainer,
   StyledMeteo,
@@ -17,6 +21,7 @@ import { pageAnimation, pageAnimationMobile, fade } from "../animation";
 const Home = () => {
   // getting back the data from redux
   const {weather} = useSelector((store) => store.weather);
+  const dispatch = useDispatch();
   // icon
   const wheatherIcon = weather.weather[0].id.toString();
   // weather desc
@@ -25,6 +30,7 @@ const Home = () => {
   const todayFormat = moment().format('DD-MM-YYYY');
   // getting city
   const localCity = weather.name;
+
 
   // get timestamp
   let unix_timestamp = weather.dt;
@@ -55,6 +61,20 @@ const Home = () => {
     }
   };
 
+  const onChangeSearch = (query,rawAnswer,suggestion) => {
+    console.log(suggestion.latlng.lat, suggestion.latlng.lng );
+    dispatch(loadLocation(suggestion.latlng.lat, suggestion.latlng.lng, 'it'));
+  };
+
+  const algoliaOptions = {
+    appId: `${process.env.REACT_APP_ALGOLIA_API_ID}`,
+    apiKey: `${process.env.REACT_APP_ALGOLIA_API_KEY}`,
+    language: 'it',
+    countries: ['it'],
+    type: 'city',
+    // Other options from https://community.algolia.com/places/documentation.html#options
+  };
+
   return (
     <StyledContainer variants={checkDevice()} initial="hidden" animate="show" exit="exit" >
       <StyledButton>
@@ -72,7 +92,33 @@ const Home = () => {
         <motion.h1 variants={fade} className="local">Oggi a <span>{localCity}</span> c'è <span>{wheatherCondition}</span></motion.h1>
         <motion.h4 variants={fade}>Ultimo Aggiornamento {todayFormat}, {formattedTime} </motion.h4>
         <motion.h4 variants={fade}>Powered by Synesthesia</motion.h4>
+        <motion.div variants={fade}>
+          <AlgoliaPlaces
+            placeholder='Scrivi la città qui'
+
+            options={algoliaOptions}
+
+            onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
+              onChangeSearch(query,rawAnswer,suggestion)}
+
+            // onSuggestions={({ rawAnswer, query, suggestions }) => 
+            //   console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
+
+            // onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
+            //   console.log('Fired when arrows keys are used to navigate suggestions.')}
+
+            // onClear={() => 
+            //   console.log('Fired when the input is cleared.')}
+
+            // onLimit={({ message }) => 
+            //   console.log('Fired when you reached your current rate limit.')}
+
+            // onError={({ message }) => 
+            //   console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
+          />
+        </motion.div>
       </StyledMeteo>
+      
     </StyledContainer>
   );
 };
